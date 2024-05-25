@@ -14,7 +14,7 @@ services:
     volumes:
       - blog-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    command: '--default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci'
+    command: '--authentication_policy=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --innodb-force-recovery=1'
     networks:
       - blog-network
 
@@ -50,6 +50,7 @@ services:
 networks:
   blog-network:
     driver: bridge
+
 volumes:
   blog-data:
     driver: local
